@@ -12,7 +12,7 @@
 
 // let element = document.createElement(1, 2, 3); - Vanilla JS
 // 1st argument of createElement: location of div on page
-// 2nd argument of createElement: where you outline your attributes, href, etc - CAN'T DEFINE CLASS, must use className
+// 2nd argument of createElement: object where you outline your attributes, href, etc - CAN'T DEFINE CLASS, must use className or call be null
 // 3rd argument of createElement: element.textContent = 'Bookstore'; // don't use innerText // html goes here
 
 /* If we handwrite out React.createElement -- describes what the page looks like 
@@ -39,7 +39,7 @@ const books = [
     { title: 'The Count of Monte Cristo', author: 'Another Guy'}
 ];
 
-let h = React.createElement; // goes into variable to save space, BUT it's not invoked - variable often called h or v
+const h = React.createElement; // goes into variable to save space, BUT it's not invoked - variable often called h or v
 
 /* -- version 1 (longer)
 let title = h('h1', null, 'Bookstore');
@@ -53,16 +53,21 @@ let container = h('div', null, [
 ]);
 */
 
-/* version 2 (shorter-ish)
+/* version 2 (shorter)
 let bookRows = books.map(book => 
+    h('li', null, `${book.title} by ${book.author}`)
+);
+
+// version 3 (shorter-ish)
+let bookRows = (book) =>
     h('li', null, `${book.title} by ${book.author}`)
 );
 */
 
-// version 3 (shortest)
+// version 4 (shortest)
 let container = h('div', null, [
     h('h1', null, 'Bookstore'), 
-    h('ul', { className : 'book-list' }, 
+    h('ul', { className : '.book-list' }, 
         books.map(book => 
             h('li', null, `${book.title} by ${book.author}`)
         )
